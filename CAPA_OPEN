@@ -1,0 +1,59 @@
+Option Private Module
+
+Sub Capa_open()
+
+'Limpa relatorios
+
+Application.ScreenUpdating = False
+
+Dim result As String
+
+
+ result = InputBox("Atualizar capa conciliação?" & Chr(13) & Chr(13) & "1-Sim" & Chr(13) & "2-Não", "Capa Conciliação | WC¬", "")
+  
+'Limpar ambos (balancete + razao)
+ 
+ 
+ If result = "Sim" Then
+
+    '>> Aplica macro Capa
+
+    Call PREENCHIMENTO_CAPA
+ 
+      
+    
+'Limpar balancete (somente)
+    
+    ElseIf result = "Não" Then
+    
+    Range("B12").Select
+        
+    
+End If
+
+Application.ScreenUpdating = True
+
+
+End Sub
+
+
+Sub Add()
+
+Dim name_ As String
+
+name_ = InputBox("Insira o nome da nova planilha?", "Capa Conciliação | WC¬", "")
+
+ActiveWorkbook.Unprotect Password:="123"
+
+Sheets.Add after:=ActiveSheet
+ActiveSheet.Name = name_
+ActiveSheet.Move after:=Sheets(8)
+'Sheets("Planilha1").Name = "X"
+'Sheets("I CAPA").Move Before:=Sheets(6)
+
+
+ActiveWorkbook.Protect Structure:=True, Windows:=False, Password:="123"
+
+End Sub
+
+
