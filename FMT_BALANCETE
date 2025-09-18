@@ -1,0 +1,123 @@
+Sub FMT_BALANCETE()
+
+Application.ScreenUpdating = False
+
+
+'FORMATACAO RELATORIO
+
+
+    'Deletar ultima linha (totalizador) + elimina quebra texto
+    
+    Range("M1048576").Select
+    Selection.End(xlUp).Select
+    ActiveCell.EntireRow.Delete
+    
+    Range("A2:XFD1048576").WrapText = False
+    Range("A2:XFD1048576").AddIndent = False
+    Range("A2:XFD1048576").ReadingOrder = xlContext
+
+
+    '>>Insere 3 linhas > alteracao layout relatorio
+    
+    Rows("1:1").Insert
+    Rows("1:1").Insert
+    Rows("1:1").Insert
+    Rows("1:1").Insert
+
+    '>>Altofiltro
+
+    Range("A5:N5").Select
+    Selection.AutoFilter
+    
+     
+    '>>Zoom planilha
+    
+    ActiveWindow.Zoom = 70
+    
+    
+    'Layout
+    
+     Range("A6:N150000").Select
+    
+        Range("A5:N5").Select
+    With Selection.Interior
+        .Pattern = xlSolid
+        .PatternColorIndex = xlAutomatic
+        .ThemeColor = xlThemeColorLight2
+        .TintAndShade = -0.499984740745262
+        .PatternTintAndShade = 0
+    End With
+    With Selection.Font
+        .ThemeColor = xlThemeColorDark1
+        .TintAndShade = -4.99893185216834E-02
+    End With
+    Selection.Font.Bold = True
+    With Selection
+        .HorizontalAlignment = xlCenter
+        .VerticalAlignment = xlBottom
+        .WrapText = False
+        .Orientation = 0
+        .AddIndent = False
+        .IndentLevel = 0
+        .ShrinkToFit = False
+        .ReadingOrder = xlContext
+        .MergeCells = False
+    End With
+    
+    
+    
+    Range("C5").FormulaR1C1 = "Cod"          'Codigo
+    Range("D5").FormulaR1C1 = "Empresa"      'Empresa
+    Range("H6:H150000").Select
+    Selection.HorizontalAlignment = xlLeft   'Orientacao Esquerda
+    
+    
+    Range("A6:N150000").Select
+    Selection.Font.Name = "Calibri"
+    Selection.Font.Size = 11
+    
+    
+    '>>Formatacao subtotal
+    
+    Range("I3:M3").Select
+    Selection.Borders(xlEdgeTop).LineStyle = xlContinuous                               '--> Formatacao Borda 01
+    Selection.Borders(xlEdgeBottom).LineStyle = xlDouble                                '--> Formatacao Borda 02
+    Selection.NumberFormat = "_($* #,##0.00_);_($* (#,##0.00);_($* ""-""??_);_(@_)"     '--> Formato Contabil
+    Selection.HorizontalAlignment = xlLeft                                              '--> Ajustar Vlrs Esquerda
+    Selection.Font.Bold = True                                                          '--> Formatacao Negrito
+    
+    Range("I3").FormulaR1C1 = "=SUBTOTAL(9,R[3]C:R[149997]C)"                           '--> Formula SubTotal
+    Range("J3").FormulaR1C1 = "=SUBTOTAL(9,R[3]C:R[149997]C)"                           '--> Formula SubTotal
+    Range("K3").FormulaR1C1 = "=SUBTOTAL(9,R[3]C:R[149997]C)"                           '--> Formula SubTotal
+    Range("L3").FormulaR1C1 = "=SUBTOTAL(9,R[3]C:R[149997]C)"                           '--> Formula SubTotal
+    Range("M3").FormulaR1C1 = "=SUBTOTAL(9,R[3]C:R[149997]C)"                           '--> Formula SubTotal
+    
+    
+    '>>Formatacao layout balancete
+    
+    Range("A6:XFD1048576").ReadingOrder = xlContext 'QUEBRA TEXTO
+    
+    Columns("I:N").EntireColumn.AutoFit                                                 '--> Ajusta Colunas
+    Range("I6:M150000").Select                                                          '--> Selecao Vlrs
+    Selection.HorizontalAlignment = xlLeft                                              '--> Alinhamento Esquerda
+    Selection.NumberFormat = "_($* #,##0.00_);_($* (#,##0.00);_($* ""-""??_);_(@_)"     '-->FORMATO CONTABIL
+    
+    Range("B:B,E:E,F:F,N:N").Select
+    Selection.EntireColumn.Hidden = True
+
+
+    Range("A:A,C:C,D:D,G:G,H:H,I:I,J:J,K:K,L:L,M:M").EntireColumn.AutoFit
+    
+    Range("O:O").Select                                                                  '--> Seleciona coluna O:O
+    Selection.ColumnWidth = 15.82                                                        '--> Ajusta tamanho coluna (15.82)
+
+    Range("R6").Activate
+    ActiveWindow.FreezePanes = True
+
+
+    Range("A7").Select
+
+Application.ScreenUpdating = True
+
+End Sub
+
