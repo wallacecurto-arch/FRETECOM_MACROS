@@ -1,0 +1,177 @@
+Option Private Module
+
+Sub GRUPO_CONTAS()
+
+
+'Instrucao bancos
+
+Application.ScreenUpdating = False
+Application.Calculation = xlCalculationManual
+
+If Planilha1.Range("H6").Value = "01 | 999999999 - Bancos" Then
+
+Planilha1.Range("B12").FormulaR1C1 = "'111020000"
+Planilha1.Range("B13").FormulaR1C1 = "'111020001"
+Planilha1.Range("B14").FormulaR1C1 = "'111020002"
+Planilha1.Range("B15").FormulaR1C1 = "'111020003"
+Planilha1.Range("B16").FormulaR1C1 = "'111020004"
+Planilha1.Range("B17").FormulaR1C1 = "'111020005"
+Planilha1.Range("B18").FormulaR1C1 = "'111020006"
+Planilha1.Range("B19").FormulaR1C1 = "'111020007"
+Planilha1.Range("B20").FormulaR1C1 = "'111020008"
+Planilha1.Range("B21").FormulaR1C1 = "'111020009"
+Planilha1.Range("B22").FormulaR1C1 = "'111020010"
+Planilha1.Range("B23").FormulaR1C1 = "'111020011"
+Planilha1.Range("B24").FormulaR1C1 = "'111020016"
+Planilha1.Range("B25").FormulaR1C1 = "'111020023"
+
+ElseIf Planilha1.Range("H6").Value = "03 | 999999999 - Bancos" Then
+
+Planilha1.Range("B12").FormulaR1C1 = "'111020000"
+Planilha1.Range("B13").FormulaR1C1 = "'111020001"
+Planilha1.Range("B14").FormulaR1C1 = "'111020007"
+Planilha1.Range("B15").FormulaR1C1 = "'111020008"
+Planilha1.Range("B16").FormulaR1C1 = "'111020011"
+Planilha1.Range("B17").FormulaR1C1 = "'111020012"
+Planilha1.Range("B18").FormulaR1C1 = "'111020013"
+Planilha1.Range("B19").FormulaR1C1 = "'111020014"
+Planilha1.Range("B20").FormulaR1C1 = "'111020015"
+Planilha1.Range("B21").FormulaR1C1 = "'111020016"
+Planilha1.Range("B22").FormulaR1C1 = "'111020017"
+Planilha1.Range("B23").FormulaR1C1 = "'111020018"
+Planilha1.Range("B24").FormulaR1C1 = "'111020019"
+Planilha1.Range("B25").FormulaR1C1 = "'111020023"
+Planilha1.Range("B26").FormulaR1C1 = "'111020024"
+Planilha1.Range("B27").FormulaR1C1 = "'111020025"
+Planilha1.Range("B28").FormulaR1C1 = "'111020026"
+Planilha1.Range("B29").FormulaR1C1 = "'111020027"
+Planilha1.Range("B30").FormulaR1C1 = "'111020028"
+
+ElseIf Planilha1.Range("H6").Value = "07 | 999999999 - Bancos" Then
+
+Planilha1.Range("B12").FormulaR1C1 = "'111020001"
+Planilha1.Range("B13").FormulaR1C1 = "'111020026"
+
+'Instrucao aplicacoes
+
+
+ElseIf Planilha1.Range("H6").Value = "01 | 999999999 - Aplicações" Then
+
+Planilha1.Range("B12").FormulaR1C1 = "'112010004"
+Planilha1.Range("B13").FormulaR1C1 = "'112010008"
+Planilha1.Range("B14").FormulaR1C1 = "'113010001"
+Planilha1.Range("B15").FormulaR1C1 = "'112010003"
+Planilha1.Range("B16").FormulaR1C1 = "'112010002"
+Planilha1.Range("B17").FormulaR1C1 = "'111030001"
+Planilha1.Range("B18").FormulaR1C1 = "'112010000"
+Planilha1.Range("B19").FormulaR1C1 = "'112010001"
+
+
+ElseIf Planilha1.Range("H6").Value = "03 | 999999999 - Aplicações" Then
+
+Planilha1.Range("B12").FormulaR1C1 = "'111030000"
+Planilha1.Range("B13").FormulaR1C1 = "'112010001"
+Planilha1.Range("B14").FormulaR1C1 = "'112010003"
+Planilha1.Range("B15").FormulaR1C1 = "'112010005"
+Planilha1.Range("B16").FormulaR1C1 = "'112010006"
+Planilha1.Range("B17").FormulaR1C1 = "'112010007"
+Planilha1.Range("B18").FormulaR1C1 = "'112010009"
+Planilha1.Range("B19").FormulaR1C1 = "'112010010"
+Planilha1.Range("B20").FormulaR1C1 = "'112010011"
+Planilha1.Range("B21").FormulaR1C1 = "'112010012"
+Planilha1.Range("B22").FormulaR1C1 = "'113010000"
+
+
+ElseIf Planilha1.Range("H6").Value = "07 | 999999999 - Aplicações" Then
+
+Planilha1.Range("B12").FormulaR1C1 = "'112010014"
+
+
+'Instrucao bancos
+
+ElseIf Planilha1.Range("H6").Value = "01 | 999999999 - Imobilizado e Intangivel" Then
+
+Planilha1.Range("B12").FormulaR1C1 = "'126010002"
+Planilha1.Range("B13").FormulaR1C1 = "'126010003"
+Planilha1.Range("B14").FormulaR1C1 = "'126010004"
+Planilha1.Range("B15").FormulaR1C1 = "'126010005"
+Planilha1.Range("B16").FormulaR1C1 = "'126010006"
+Planilha1.Range("B17").FormulaR1C1 = "'126010007"
+Planilha1.Range("B18").FormulaR1C1 = "'126020002"
+Planilha1.Range("B19").FormulaR1C1 = "'126020003"
+Planilha1.Range("B20").FormulaR1C1 = "'126020004"
+Planilha1.Range("B21").FormulaR1C1 = "'126020005"
+Planilha1.Range("B22").FormulaR1C1 = "'126020006"
+Planilha1.Range("B23").FormulaR1C1 = "'126020007"
+Planilha1.Range("B24").FormulaR1C1 = "'127010002"
+Planilha1.Range("B25").FormulaR1C1 = "'127010005"
+Planilha1.Range("B26").FormulaR1C1 = "'127010007"
+Planilha1.Range("B27").FormulaR1C1 = "'127020002"
+Planilha1.Range("B28").FormulaR1C1 = "'127020005"
+Planilha1.Range("B29").FormulaR1C1 = "'127020007"
+
+
+ElseIf Planilha1.Range("H6").Value = "03 | 999999999 - Imobilizado e Intangivel" Then
+
+Planilha1.Range("B12").FormulaR1C1 = "'126010002"
+Planilha1.Range("B13").FormulaR1C1 = "'126010003"
+Planilha1.Range("B14").FormulaR1C1 = "'126010004"
+Planilha1.Range("B15").FormulaR1C1 = "'126010005"
+Planilha1.Range("B16").FormulaR1C1 = "'126010006"
+Planilha1.Range("B17").FormulaR1C1 = "'126010007"
+Planilha1.Range("B18").FormulaR1C1 = "'126020002"
+Planilha1.Range("B19").FormulaR1C1 = "'126020003"
+Planilha1.Range("B20").FormulaR1C1 = "'126020004"
+Planilha1.Range("B21").FormulaR1C1 = "'126020005"
+Planilha1.Range("B22").FormulaR1C1 = "'126020006"
+Planilha1.Range("B23").FormulaR1C1 = "'126020007"
+Planilha1.Range("B24").FormulaR1C1 = "'127010002"
+Planilha1.Range("B25").FormulaR1C1 = "'127010005"
+Planilha1.Range("B26").FormulaR1C1 = "'127010007"
+Planilha1.Range("B27").FormulaR1C1 = "'127020002"
+Planilha1.Range("B28").FormulaR1C1 = "'127020005"
+Planilha1.Range("B29").FormulaR1C1 = "'127020007"
+
+
+ElseIf Planilha1.Range("H6").Value = "07 | 999999999 - Imobilizado e Intangivel" Then
+
+Planilha1.Range("B12").FormulaR1C1 = "'126010002"
+Planilha1.Range("B13").FormulaR1C1 = "'126010003"
+Planilha1.Range("B14").FormulaR1C1 = "'126010004"
+Planilha1.Range("B15").FormulaR1C1 = "'126010005"
+Planilha1.Range("B16").FormulaR1C1 = "'126010006"
+Planilha1.Range("B17").FormulaR1C1 = "'126010007"
+Planilha1.Range("B18").FormulaR1C1 = "'126020002"
+Planilha1.Range("B19").FormulaR1C1 = "'126020003"
+Planilha1.Range("B20").FormulaR1C1 = "'126020004"
+Planilha1.Range("B21").FormulaR1C1 = "'126020005"
+Planilha1.Range("B22").FormulaR1C1 = "'126020006"
+Planilha1.Range("B23").FormulaR1C1 = "'126020007"
+Planilha1.Range("B24").FormulaR1C1 = "'127010002"
+Planilha1.Range("B25").FormulaR1C1 = "'127010005"
+Planilha1.Range("B26").FormulaR1C1 = "'127010007"
+Planilha1.Range("B27").FormulaR1C1 = "'127020002"
+Planilha1.Range("B28").FormulaR1C1 = "'127020005"
+Planilha1.Range("B29").FormulaR1C1 = "'127020007"
+
+'MsgBox ">> Racional Conciliação: " & Chr(13) & " " & Chr(13) & "(+) Relatório Anterior" _
+& Chr(13) & "(-) Relatório Atual" & Chr(13) & "(+) Razão Contábil" _
+& Chr(13) & "-------------------------------" & Chr(13) & "Resultado Conciliação >>>>>>>" _
+, vbInformation, "CONCILIAÇÃO | " & Planilha1.Range("C8").Value
+
+
+'Contrapartida do SE
+
+'ElseIf Planilha11.Range("M1").Value = 122 Then
+'MsgBox ">> 122 - MPB CAPITAL LLC | CONTAS BANCÁRIAS: " & Chr(13) & " " & Chr(13) & Planilha16.Range("AM5").Value _
+'& Planilha16.Range("AM6").Value & Chr(13) & Planilha16.Range("AM16").Value _
+', vbInformation, "CONCILIAÇÃO | OFFSHORE"
+
+
+End If
+
+Application.ScreenUpdating = True
+Application.Calculation = xlCalculationAutomatic
+
+End Sub
+
