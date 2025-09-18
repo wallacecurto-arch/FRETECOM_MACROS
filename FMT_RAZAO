@@ -1,0 +1,448 @@
+Option Private Module
+
+Sub FMT_RAZAO()
+'
+' FORMAT_EXTRATO Macro
+'
+
+Range("A4").Select
+
+Application.ScreenUpdating = False
+
+'Congela painel
+
+Range("A2").Activate
+ActiveWindow.FreezePanes = True
+
+
+'Deletar ultima linha (totalizador) + elimina quebra texto
+
+Range("Z1048576").Select
+Selection.End(xlUp).Select
+ActiveCell.EntireRow.Delete
+
+Range("A1:XFD1048576").WrapText = False
+Range("A1:XFD1048576").AddIndent = False
+Range("A1:XFD1048576").ReadingOrder = xlContext
+
+
+'Desfaz a mescla de delulas
+
+Rows("1:150000").Select
+Selection.UnMerge
+
+
+'Layout Amigavel
+
+Range("AA1").FormulaR1C1 = "MOVIMENTO"          'MOVIMENTO
+Range("AB1").FormulaR1C1 = "EMPRESA"            'EMPRESA
+Range("AC1").FormulaR1C1 = "DATA"               'DATA
+Range("AD1").FormulaR1C1 = "HISTORICO"          'HISTORICO
+Range("AE1").FormulaR1C1 = "DEBITO"             'DEBITO
+Range("AF1").FormulaR1C1 = "CREDITO"            'CREDITO
+Range("AG1").FormulaR1C1 = "SALDO ATUAL"        'SALDO ATUAL
+Range("AH1").FormulaR1C1 = "DESCRICAO CONTA"    'DESCRICAO
+
+
+'FORMULA MOVIMENTO
+
+        
+Range("AA2").FormulaR1C1 = "=IF(RC[-1]="""","""",RC[-1])"
+        
+Range("AA2:AA150000").Formula = Range("AA2").Formula
+
+
+Range("AA2:AA150000").Select
+    Selection.NumberFormat = "_($* #,##0.00_);_($* (#,##0.00);_($* ""-""??_);_(@_)"     '-->FORMATO CONTABIL
+
+
+'FORMULA EMPRESA
+
+        
+Range("AB2").FormulaR1C1 = "=IF(RC[-18]="""","""",RC[-18])"
+
+Range("AB2:AB150000").Formula = Range("AB2").Formula
+
+
+'FORMULA DATA
+
+Range("AC2").FormulaR1C1 = "=IF(RC[-25]="""","""",RC[-25])"
+
+Range("AC2:AC150000").Formula = Range("AC2").Formula
+
+    
+Range("AC2:AC150000").Select
+    Selection.NumberFormat = "m/d/yyyy"         '-->FORMATO DATA
+
+'FORMULA HISTORICO
+
+Range("AD2").FormulaR1C1 = "=IF(RC[-7]="""","""",RC[-7])"
+
+Range("AD2:AD150000").Formula = Range("AD2").Formula
+
+
+
+'FORMULA DEBITO
+
+Range("AE2").FormulaR1C1 = "=IF(RC[-7]=0,0,IF(RC[-5]="""","""",IF(RC[-7]="""",0,IF(RC[-7]<>0,RC[-7]))))"
+
+Range("AE2:AE150000").Formula = Range("AE2").Formula
+
+Range("AE2:AE150000").Select
+    Selection.NumberFormat = "_($* #,##0.00_);_($* (#,##0.00);_($* ""-""??_);_(@_)"     '-->FORMATO CONTABIL
+
+
+
+'FORMULA CREDITO
+
+Range("AF2").FormulaR1C1 = "=IF(RC[-7]=0,0,IF(RC[-6]="""","""",IF(RC[-7]="""",0,IF(RC[-7]<>0,RC[-7]))))"
+
+Range("AF2:AF150000").Formula = Range("AF2").Formula
+
+Range("AF2:AF150000").Select
+    Selection.NumberFormat = "_($* #,##0.00_);_($* (#,##0.00);_($* ""-""??_);_(@_)"     '-->FORMATO CONTABIL
+
+
+'FORMULA SALDO ATUAL
+
+Range("AG2").Select
+    ActiveCell.FormulaR1C1 = "=IF(RC[-7]="""","""",RC[-6])"
+    Range("AG3").Select
+    ActiveCell.FormulaR1C1 = "=IF(RC[-7]="""","""",R[-1]C+RC[-6])"
+   
+Range("AG3:AG150000").Formula = Range("AG3").Formula
+
+Range("AG2:AG150000").Select
+    Selection.NumberFormat = "_($* #,##0.00_);_($* (#,##0.00);_($* ""-""??_);_(@_)"     '-->FORMATO CONTABIL
+
+
+'FORMULA DESCRICAO CONTA
+
+
+   Range("AH2").FormulaR1C1 = _
+       "=IF(RC[-8]="""","""",CONCATENATE(RC[-22],"" - "",IF(RC[-21]="""","""",RC[-21])))"
+
+Range("AH2:AH150000").Formula = Range("AH2").Formula
+
+
+
+'Layout Journal
+
+Range("AI1").FormulaR1C1 = "*Empresa[..]"
+Range("AJ1").FormulaR1C1 = "*Filial [..]"
+Range("AK1").FormulaR1C1 = "*Centro custo [..]"
+Range("AL1").FormulaR1C1 = "*Conta Contabil [..]"
+Range("AM1").FormulaR1C1 = "*Und Negocio [..]"
+Range("AN1").FormulaR1C1 = "*Intercompany [..]"
+Range("AO1").FormulaR1C1 = "*Futuro 1 [..]"
+Range("AP1").FormulaR1C1 = "*Futuro 2 [..]"
+Range("AQ1").FormulaR1C1 = "*Moeda [..]"
+Range("AR1").FormulaR1C1 = "*Debito"
+Range("AS1").FormulaR1C1 = "*Credito"
+Range("AT1").FormulaR1C1 = "Descricao da Linha"
+Range("AU1").FormulaR1C1 = "Chave"
+
+ 
+'FORMULA *Empresa[..]
+
+
+          
+    Range("AI2").FormulaR1C1 = "=IF(RC[-25]="""","""",RC[-25])"
+        
+                       
+Range("AI2:AI150000").Formula = Range("AI2").Formula
+
+
+'FORMULA *Filial [..]
+
+Range("AJ2").FormulaR1C1 = "=IF(RC[-20]="""","""",RC[-20])"
+
+Range("AJ2:AJ150000").Formula = Range("AJ2").Formula
+
+
+'FORMULA *Centro custo [..]
+
+Range("AK2").FormulaR1C1 = "=IF(RC[-23]="""","""",RC[-23])"
+
+Range("AK2:AK150000").Formula = Range("AK2").Formula
+
+
+'FORMULA *Conta Contabil [..]
+
+Range("AL2").FormulaR1C1 = "=IF(RC[-26]="""","""",RC[-26])"
+
+Range("AL2:AL150000").Formula = Range("AL2").Formula
+
+
+'FORMULA *Und Negocio [..]
+
+
+Range("AM2").FormulaR1C1 = "=IF(RC[-21]="""","""",RC[-21])"
+
+Range("AM2:AM150000").Formula = Range("AM2").Formula
+
+    
+Range("AN2:AN150000").Select
+    Selection.NumberFormat = "m/d/yyyy"
+
+'FORMULA *Intercompany [..]
+
+
+Range("AN2").FormulaR1C1 = "=IF(RC[-22]="""","""",""00"")"
+
+Range("AN2:AN150000").Formula = Range("AN2").Formula
+
+
+'FORMULA *Futuro 1 [..]
+
+Range("AO2").FormulaR1C1 = "=IF(RC[-23]="""","""",""00000"")"
+
+Range("AO2:AO150000").Formula = Range("AO2").Formula
+
+
+'FORMULA *Futuro 2 [..]
+
+Range("AP2").FormulaR1C1 = "=IF(RC[-23]="""","""",""00000"")"
+
+Range("AP2:AP150000").Formula = Range("AP2").Formula
+
+
+'FORMULA *Moeda [..]
+
+Range("AQ2").FormulaR1C1 = "=IF(RC[-24]="""","""",""BRL"")"
+
+Range("AQ2:AQ150000").Formula = Range("AQ2").Formula
+
+
+
+'FORMULA *Debito
+
+Range("AR2").FormulaR1C1 = "=IF(RC[-20]="""","""",RC[-20])"
+
+Range("AR2:AR150000").Formula = Range("AR2").Formula
+
+Range("AR2:AR150000").Select
+Selection.NumberFormat = "_($* #,##0.00_);_($* (#,##0.00);_($* ""-""??_);_(@_)"     '-->FORMATO CONTABIL
+
+
+'FORMULA *Credito
+
+Range("AS2").FormulaR1C1 = "=IF(RC[-20]="""","""",RC[-20])"
+
+Range("AS2:AS150000").Formula = Range("AS2").Formula
+
+Range("AS2:AS150000").Select
+Selection.NumberFormat = "_($* #,##0.00_);_($* (#,##0.00);_($* ""-""??_);_(@_)"     '-->FORMATO CONTABIL
+
+'FORMULA Descricao da Linha
+
+Range("AT2").FormulaR1C1 = "=IF(RC[-23]="""","""",RC[-23])"
+
+Range("AT2:AT150000").Formula = Range("AT2").Formula
+
+'FORMULA Chave
+
+Range("AU2").FormulaR1C1 = "=IF(RC[-24]="""","""",""B2177581W88)EU.0"")"
+
+Range("AU2:AU150000").Formula = Range("AU2").Formula
+
+
+
+'-------------------------------------------------------------------------------------
+
+'FORMATACAO TITULO LAYOUT AMIGAVEL
+
+    ActiveWindow.ScrollColumn = 29
+    ActiveWindow.ScrollColumn = 28
+    ActiveWindow.ScrollColumn = 27
+    ActiveWindow.ScrollColumn = 26
+    ActiveWindow.ScrollColumn = 25
+    ActiveWindow.ScrollColumn = 24
+    ActiveWindow.ScrollColumn = 23
+    Range("AA1:AU1").Select
+    With Selection.Interior
+        .Pattern = xlSolid
+        .PatternColorIndex = xlAutomatic
+        .ThemeColor = xlThemeColorLight2
+        .TintAndShade = -0.499984740745262
+        .PatternTintAndShade = 0
+    End With
+    With Selection.Font
+        .ThemeColor = xlThemeColorDark1
+        .TintAndShade = -4.99893185216834E-02
+    End With
+    Selection.Font.Bold = True
+    With Selection
+        .HorizontalAlignment = xlCenter
+        .VerticalAlignment = xlBottom
+        .WrapText = False
+        .Orientation = 0
+        .AddIndent = False
+        .IndentLevel = 0
+        .ShrinkToFit = False
+        .ReadingOrder = xlContext
+        .MergeCells = False
+    End With
+
+ Range("AA2:AH150000").Select
+    With Selection.Interior
+        .Pattern = xlSolid
+        .PatternColorIndex = xlAutomatic
+        .ThemeColor = xlThemeColorAccent1
+        .TintAndShade = 0.599993896298105
+        .PatternTintAndShade = 0
+       
+    End With
+
+
+'Ajustar esquerda > DESCRICAO CONTA (Layout analise)
+
+Range("AH2:AH150000").HorizontalAlignment = xlLeft
+
+
+'FORMATACAO JOURNAL
+
+    Range("AI2:AU150000").Select
+    With Selection.Interior
+        .Pattern = xlSolid
+        .PatternColorIndex = xlAutomatic
+        .ThemeColor = xlThemeColorAccent2
+        .TintAndShade = 0.799981688894314
+        .PatternTintAndShade = 0
+    End With
+
+
+'OCULTAR RAZAO
+
+    Columns("A:Z").Select
+    Range("AA1").Activate
+    Selection.EntireColumn.Hidden = True
+
+    '>>Zoom 70%
+
+    ActiveWindow.Zoom = 70
+
+
+    '>>Altofiltro
+
+    Range("A1:AU1").Select
+    Selection.AutoFilter
+    
+    '>>AutoAjuste Colunas
+    
+    Columns("AA:AI").EntireColumn.AutoFit
+    
+    
+    '>>Ajuste coluna historico
+    
+    Range("AD:AD,AH:AH,AX:AX,AU:AU").Select
+    Selection.ColumnWidth = 60.82
+   
+    Range("AD:AD,AT:AT").Select
+    Selection.ColumnWidth = 80.82
+   
+   
+   '>>Ajustar colunas
+   
+   Range( _
+        "AB:AB,AC:AC,AF:AF,AG:AG,AH:AH,AJ:AJ,AK:AK,AL:AL,AM:AM,AN:AN,AO:AO,AP:AP,AQ:AQ,AR:AR,AS:AS,AU:AU,AV:AV,AW:AW,AX:AX" _
+        ).EntireColumn.AutoFit
+        
+    Range("AB:AB,AC:AC,AD:AD,AF:AF,AG:AG,AI:AI,AJ:AJ,AK:AK,AL:AL,AM:AM,AN:AN,AO:AO,AP:AP,AQ:AQ,AR:AR,AS:AS,AT:AT,AU:AU,AV:AV,AW:AW,AX:AX").HorizontalAlignment = xlCenter
+    
+    
+    Range("AB:AB").HorizontalAlignment = xlCenter
+    
+   
+    
+'Limpa celulas mescladas
+
+  Call LMP_linhas
+  
+  
+'Reestabelece formula > Saldo Layout Amigavel
+
+ActiveCell.FormulaR1C1 = "=IF(RC[-7]="""","""",R[-1]C+RC[-6])"
+   
+Range("AG3:AG150000").Formula = Range("AG3").Formula
+           
+  
+'Limpa linhas brancas
+    
+    
+    Rows("1048576:1048576").Select
+    Range(Selection, Selection.End(xlUp)).Select
+    ActiveCell.Offset(1, 0).Select
+    ActiveCell.EntireRow.Select
+    Range(Selection, Selection.End(xlDown)).Delete
+    
+    
+'Ocultar Razao Bruto
+    
+Columns("A:Z").Select
+Selection.EntireColumn.Hidden = True
+
+
+'Reestabelece formula > Saldo Layout Amigavel
+
+ActiveCell.FormulaR1C1 = "=IF(RC[-7]="""","""",R[-1]C+RC[-6])"
+   
+Range("AG3:AG150000").Formula = Range("AG3").Formula
+         
+         
+Range("AD1").FormulaR1C1 = "HISTORICO"          'HISTORICO > REFAZ O HISTORICO (ANALISAR ROTINA)
+
+
+'Colar valores + formatos
+
+
+Range("AA1:AU1048576").Copy
+Range("AA1:AU1048576").PasteSpecial Paste:=xlPasteValuesAndNumberFormats
+Application.CutCopyMode = False
+
+'Range("AA1:AU1048576").Values = Range("AA1:AU1048576").Values
+  
+'Range("AR1:AR1048576").Value = Range("AR1:AR1048576").Value
+    
+'Range("AW1:AZ1048576").Value = Range("AW1:AZ1048576").Value
+         
+         
+Range("AA3").Select
+
+
+
+Application.ScreenUpdating = True
+
+
+End Sub
+
+Sub LMP_linhas()
+
+'Deleta linhas em branco ou amarelas
+
+Dim lLin As Long
+
+With ActiveSheet
+
+    For lLin = .Cells(.Rows.Count, "A").End(xlUp).Row To 2 Step -1
+        'If .Cells(lLin, "A").Interior.Color = 65535 Then .Rows(lLin).Delete    'Deleta se celula fmt amarela
+        If .Cells(lLin, "A") = "" Then .Rows(lLin).Delete                       'Deleta se vazio
+    
+        'Desafoga os processos pendentes a cada 100 linhas
+    
+        If lLin Mod 100 = 0 Then DoEvents
+    
+    Next lLin
+    
+End With
+
+  
+    
+End Sub
+
+
+
+
+
+
+
