@@ -1,0 +1,138 @@
+Option Private Module
+
+Option Explicit
+
+Private module
+
+Const ttlinhas = 1048576
+
+Sub IMP_BALANCETE()
+
+'Definicao das variaveis
+'--------------------------------------
+Dim W               As Worksheet
+Dim sht             As Worksheet
+Dim WNew            As Workbook
+Dim ArqParaAbrir    As Variant
+Dim A               As Integer
+Dim NomeArquivo     As String
+
+Application.ScreenUpdating = False
+Application.Calculation = xlCalculationManual
+
+
+Sheets("III BALANCETE").Select
+Range("A6:M5000").Select
+Selection.ClearContents
+
+
+'Torna visivel > planilha _fin
+'___________________________________
+
+'Sheets("_fin").Visible = True
+
+
+'Capturar arquivos para tratamento
+'---------------------------------------
+
+On Error GoTo erro_codigo
+
+ArqParaAbrir = "G:\Drives compartilhados\Finance\BALANCETES\" & Planilha11.Range("A7").Value
+
+'ArqParaAbrir = Application.GetOpenFilename("Arquivo do Excel (*.xlsx), *.x*", _
+                Title:="Escolha o arquivo a ser importado", _
+                MultiSelect:=True)                                             ' FORMATOS ACEITOS NA IMPORTAÇÃO
+                 
+                                  
+If Not IsArray(ArqParaAbrir) Then
+
+    If ArqParaAbrir = "" Or ArqParaAbrir = False Then
+    
+        MsgBox "Nenhum arquivo escolhido!!", vbExclamation, "Importação Abortada | WC¬"
+        Exit Sub
+    
+    End If
+
+End If
+
+
+'Comeca a importacao dos dados
+'-------------------------------------
+Set W = Planilha6  '****planilha destino
+
+
+W.Select
+
+'Deleta os dados > Aba III BALANCETE
+
+'W.UsedRange.EntireColumn.Delete
+Planilha6.Range("A6:M5000").ClearContents
+
+'Loop para importacao dos arquivos
+'--------------------------------------
+
+'For A = LBound(ArqParaAbrir) To UBound(ArqParaAbrir)
+
+    NomeArquivo = ArqParaAbrir '(A)
+    
+    Application.Workbooks.Open ArqParaAbrir '(A)
+    
+    Set WNew = ActiveWorkbook
+    
+ 'Percorre cada uma das planilhas da Workbook (pasta de trabalho) importada
+ '--------------------------------------------------------------------------
+ 
+    For Each sht In WNew.Sheets
+ 
+    sht.Select
+    sht.Range("A6:M5000").Select
+    
+    Selection.Copy Destination:=W.Cells(ttlinhas, 1).End(xlUp).Offset(1, 0)
+
+    Next sht
+    
+Application.DisplayAlerts = False
+
+    WNew.Close savechanges:=False
+    
+Application.DisplayAlerts = True
+
+  
+    W.Cells(W.Rows.Count, 1).End(xlUp).Offset(1, 5).Select
+
+'Next
+
+
+ 'Sheets("_fin").Select
+    'ActiveWindow.SelectedSheets.Visible = False
+    
+ Sheets("I CAPA").Select
+
+MsgBox "Balancete importado!!", vbInformation, "Imp Balancete | WC¬"
+
+
+ponto_saida:
+    On Error Resume Next
+    Application.Calculation = xlCalculationAutomatic
+    Application.ScreenUpdating = True
+    Set W = Nothing
+    Exit Sub
+    
+erro_codigo:
+    MsgBox "Balancete não importado. Fale com Wallace Curto!", vbExclamation
+     Resume ponto_saida
+
+
+Application.Calculation = xlCalculationAutomatic
+Application.ScreenUpdating = True
+
+   
+End Sub
+
+
+
+
+
+
+
+
