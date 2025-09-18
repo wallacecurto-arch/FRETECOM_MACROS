@@ -1,0 +1,232 @@
+'Option Private Module
+
+Sub PREENCHIMENTO_CAPA()
+
+
+Application.ScreenUpdating = False
+Application.Calculation = xlCalculationManual
+
+
+'Insere USERNAME > Analista contábil
+
+    'Planilha1.Range("E6").Value = Environ("Username")
+    
+    
+    Planilha1.Range("B2").FormulaR1C1 = "=MID(R[4]C[1],6,100)"
+    Planilha1.Range("C6").FormulaR1C1 = "=CONCATENATE(LEFT(R[-4]C[-2],2),"" - "",IF(LEFT(R[-4]C[-2],2)=""01"",""CARGOX TRANSPORTES LTDA"",IF(LEFT(R[-4]C[-2],2)=""03"",""FRETEBRAS INTERNET E SERVICOS LTDA"",IF(LEFT(R[-4]C[-2],2)=""07"",""INTERSITE SISTEMAS LTDA."",IF(LEFT(R[-4]C[-2],2)=""03"",""FRETEBRAS INTERNET E SERVICOS LTDA"",IF(LEFT(R[-4]C[-2],2)=""05"",""INTERNATIONAL LOGISTICS HOLDING INC."",IF(LEFT" & _
+        "(R[-4]C[-2],2)=""06"",""INTERNATIONAL LOGISTICS HOLDING LLC"",IF(LEFT(R[-4]C[-2],2)=""00"",""ABREU E  WEBER LTDA ME""))))))))" & _
+        ""
+    Planilha1.Range("C7").FormulaR1C1 = "=IF(LEFT(R[1]C,9)<>"""",""Relatório Financeiro"")"
+    Planilha1.Range("C8").FormulaR1C1 = "=MID(R[-2]C[5],SEARCH("" | "",R[-2]C[5],1)+3,100)"
+    Planilha1.Range("C9").FormulaR1C1 = "=VLOOKUP('III BALANCETE'!R6C1,'03-Parametros'!R9C4:R20C5,2,0)"
+    Planilha1.Range("E6").FormulaR1C1 = Environ("Username")
+    Planilha1.Range("E7").FormulaR1C1 = "Contabilidade"
+    Planilha1.Range("E8").FormulaR1C1 = "BRL"
+    Planilha1.Range("E9").FormulaR1C1 = "=WORKDAY(EOMONTH(VLOOKUP('III BALANCETE'!R6C1,'03-Parametros'!R9C4:R20C5,2,0),0),5,'03-Parametros'!R9C1:R24C1)"
+    Planilha1.Range("H8").FormulaR1C1 = "=IF('IIII PENDÊNCIAS'!RC[-3]="""",0,EOMONTH(VLOOKUP('III BALANCETE'!R6C1,'03-Parametros'!R9C4:R20C5,2,0),0)-MIN('IIII PENDÊNCIAS'!R8C5:R500C5))"
+    Planilha1.Range("H9").FormulaR1C1 = "=IF(R8C8=0,""A-Reconciliada, sem pendências."",IF(R8C8<=30,""B-Reconciliada, pendências <30 dias."",IF(AND(R8C8>30,R8C8<=90),""C-Reconciliada,  pendências 31 - 90 dias."",IF(R8C8>90,""D-Reconciliada, pendências > 90 dias"",""E-Não reconciliada e/ou composta apenas""))))"
+    Planilha1.Range("C2").FormulaR1C1 = "=MATCH(R2C2,'03-Parametros'!R[-1]C[-2]:R[5]C[-2],0)"
+    Planilha1.Range("A1").FormulaR1C1 = "=MID(R[5]C[7],SEARCH(""| "",R[5]C[7],1)+2,9)"
+    Planilha1.Range("A2").FormulaR1C1 = "=LEFT(R[4]C[7],2)"
+    Planilha1.Range("B10").FormulaR1C1 = "='III BALANCETE'!R[-4]C[-1]"
+    Planilha1.Range("C10").FormulaR1C1 = "=CELL(""nome.arquivo"",R[-9]C[-2])"
+    
+    Planilha1.Range("B12").FormulaR1C1 = "=IF(LEFT(R[-6]C[6],2)=""00"",LEFT(R[-4]C[1],13),MID(R[-6]C[6],SEARCH(""|"",R[-6]C[6],1)+2,9)*1)"
+    Planilha1.Range("B13").FormulaR1C1 = "--"
+    Planilha1.Range("C12").FormulaR1C1 = "=IFERROR(IF(LEFT(R[-6]C[5],2)=""00"",MID(R[-4]C,17,100),VLOOKUP(LEFT(RC[-1],15),'III BALANCETE'!R5C7:R150000C13,2,0)),""--"")"
+    Planilha1.Range("D12").FormulaR1C1 = "=IFERROR(VLOOKUP(LEFT(RC[-2],9),'III BALANCETE'!R5C7:R150000C13,7,0),""--"")"
+    'Planilha1.Range("E12").FormulaR1C1 = "--"
+    Planilha1.Range("F12").FormulaR1C1 = "=IFERROR(ROUND(RC[-2]-RC[-1],2),""--"")"
+    Planilha1.Range("G12").FormulaR1C1 = "--"
+    Planilha1.Range("H12").FormulaR1C1 = "=IFERROR(IF(ROUND(ABS(RC[-2]),2)=0,""--"",""Dif em analise""),""--"")"
+
+    Planilha1.Range("B13:B58").Value = Planilha1.Range("B13").Value
+    Planilha1.Range("C12:C58").Formula = Planilha1.Range("C12").Formula
+    Planilha1.Range("D12:D58").Formula = Planilha1.Range("D12").Formula
+    'Planilha1.Range("E13:E58").Formula = Planilha1.Range("D13").Formula
+    Planilha1.Range("F12:F58").Formula = Planilha1.Range("F12").Formula
+    Planilha1.Range("G12:G58").Formula = Planilha1.Range("G12").Formula
+    Planilha1.Range("H12:H58").Formula = Planilha1.Range("H12").Formula
+
+    Planilha1.Range("B60").FormulaR1C1 = "----------"
+    Planilha1.Range("C60").FormulaR1C1 = "Composição pendências"
+    Planilha1.Range("D60").FormulaR1C1 = "0"
+    Planilha1.Range("E60").FormulaR1C1 = "='IIII PENDÊNCIAS'!R[-53]C[9]*1"
+    Planilha1.Range("F60").FormulaR1C1 = "=RC[-1]-RC[-2]"
+    Planilha1.Range("G60").FormulaR1C1 = "'--"
+    Planilha1.Range("H60").FormulaR1C1 = "Dif em analise"
+
+    Planilha1.Range("B82").FormulaR1C1 = "=CONCATENATE(""                             >>>>>>>>>>>>>>>>>>>>>> | CONSOLIDADOR --> "",UPPER(MID(R[-74]C[1],13,100)))"
+    Planilha1.Range("D82").FormulaR1C1 = "=SUM(R[-70]C:R[-2]C)-SUMIF(R12C2:R80C2,""11604004"",R12C4:R80C4)"
+    Planilha1.Range("E82").FormulaR1C1 = "=SUM(R[-70]C:R[-2]C)-SUMIF(R12C2:R80C2,""11604004"",R12C5:R80C5)"
+    Planilha1.Range("F82").FormulaR1C1 = "=RC[-2]-RC[-1]"
+    Planilha1.Range("B84").FormulaR1C1 = "=CONCATENATE(""                             >>>>>>>>>>>>>>>>>>>>>> | COMPOSICAO PENDÊNCIAS                                            "")"
+    Planilha1.Range("D84").FormulaR1C1 = "=SUM(R[-24]C:R[-4]C)"
+    Planilha1.Range("E84").FormulaR1C1 = "=SUM(R[-24]C:R[-4]C)"
+    Planilha1.Range("F84").FormulaR1C1 = "=RC[-2]-RC[-1]"
+
+    Planilha7.Range("B2").FormulaR1C1 = "=CONCATENATE(""APONTAMENTOS - "",IF(MONTH(VLOOKUP('III BALANCETE'!R6C1,'03-Parametros'!R9C4:R20C5,2,0))<10,CONCATENATE(""0"",MONTH(VLOOKUP('III BALANCETE'!R6C1,'03-Parametros'!R9C4:R20C5,2,0))),MONTH(VLOOKUP('III BALANCETE'!R6C1,'03-Parametros'!R9C4:R20C5,2,0))),""/2022 | COMPOSIÇÃO"")"
+    Planilha7.Range("B8").FormulaR1C1 = "=IF(RC[4]="""","""",LEFT('I CAPA'!R6C3,2))"
+    Planilha7.Range("C8").FormulaR1C1 = "=IF(RC[3]="""","""",EOMONTH(VLOOKUP('III BALANCETE'!R6C1,'03-Parametros'!R9C4:R20C5,2,0),0)-RC[2]*1)"
+    Planilha7.Range("D8").FormulaR1C1 = "=IF(RC[2]="""","""",LEFT('I CAPA'!R12C2,100))"
+    Planilha7.Range("K8").FormulaR1C1 = "=IF(RC[-5]="""","""",NOW())"
+    Planilha7.Range("N7").FormulaR1C1 = "=SUM('I CAPA'!R12C6:R58C6)"
+    Planilha7.Range("N8").FormulaR1C1 = "=R[-1]C+RC[-7]"
+    
+    
+'Colar valores + formatos
+
+'>> 1 - Quadrante
+
+'Range("C6:H9").Copy
+'Range("C6:H9").PasteSpecial Paste:=xlPasteValuesAndNumberFormats
+'Application.CutCopyMode = False
+
+
+'>> 2 - Quadrante
+
+'Range("B12:C58").Copy
+'Range("B12:C58").PasteSpecial Paste:=xlPasteValuesAndNumberFormats
+'Application.CutCopyMode = False
+
+'>> 3 - Quadrante
+
+'Range("B60:C80").Copy
+'Range("B60:C80").PasteSpecial Paste:=xlPasteValuesAndNumberFormats
+'Application.CutCopyMode = False
+
+'>> Composicao Pendencias
+
+Planilha7.Range("B8:B30").Formula = Planilha7.Range("B8").Formula
+Planilha7.Range("C8:C30").Formula = Planilha7.Range("C8").Formula
+Planilha7.Range("D8:D30").Formula = Planilha7.Range("D8").Formula
+Planilha7.Range("K8:K30").Formula = Planilha7.Range("K8").Formula
+Planilha7.Range("N8:N30").Formula = Planilha7.Range("N8").Formula
+
+Planilha1.Range("H7").FormulaR1C1 = "=NOW()"                                         '--> Data atualizacao
+
+Application.Calculation = xlCalculationAutomatic
+
+'Colar valores + formatos
+
+'>> 1 - Quadrante
+
+Range("C9").Copy
+Range("C9").PasteSpecial Paste:=xlPasteValuesAndNumberFormats
+Application.CutCopyMode = False
+
+Planilha1.Range("H7").FormulaR1C1 = "=NOW()"
+
+Range("B12").Select
+
+    Call GRUPO_CONTAS
+
+Application.ScreenUpdating = True
+
+End Sub
+
+Sub LIMPAR_RLT()
+
+'Limpa relatorios
+
+Application.ScreenUpdating = False
+
+Dim result As String
+
+
+ result = InputBox("Apagar relatórios?" & Chr(13) & Chr(13) & "1-Suporte" & Chr(13) & "2-Balancete" & Chr(13) & "3-Pendencias" & Chr(13) & "4-Ambos (2 relatórios)", "Limpar Relatórios | WC¬", "")
+ 
+ 
+'Limpar ambos (balancete + razao)
+ 
+ 
+ If result = "Ambos" Then
+
+    '>> Suporte
+
+    Planilha3.Select
+    [A1:XFD1048576].Clear
+    Range("D5").Select
+    Planilha1.Select
+
+    '>> Balancete
+    
+    Planilha6.Select
+    Cells.Select
+    FreezePanes = False
+    [A1:XFD1048576].Clear
+    ActiveWindow.FreezePanes = False
+    Range("A1").Select
+    Planilha1.Select
+        
+    '>> Pendencias (somente)
+           
+    Planilha7.Select
+    [B8:L1048576].ClearContents
+    Planilha1.Select
+   
+    
+'Limpar balancete (somente)
+    
+    ElseIf result = "Balancete" Then
+    
+    Planilha6.Select
+    Cells.Select
+    FreezePanes = False
+    [A1:XFD1048576].Clear
+    ActiveWindow.FreezePanes = False
+    Range("A1").Select
+    Planilha1.Select
+    
+    
+    'Limpar suporte (somente)
+    
+     ElseIf result = "Suporte" Then
+     
+    Planilha3.Select
+    [A1:XFD1048576].Clear
+    Range("D5").Select
+    Planilha1.Select
+
+
+    'Limpar Pendencias (somente)
+    
+     ElseIf result = "Pendencias" Then
+     
+    Planilha7.Select
+    [B8:L1048576].ClearContents
+    Planilha1.Select
+
+End If
+
+Application.ScreenUpdating = True
+
+End Sub
+
+
+Sub MENSAGEM_INSTRUCAO()
+
+
+'Instrucao fornecedor [211010000]
+
+If Planilha3.Range("D2").Value = 211010000 Then
+MsgBox ">> Racional Conciliação: " & Chr(13) & " " & Chr(13) & "(+) Relatório Anterior" _
+& Chr(13) & "(-) Relatório Atual" & Chr(13) & "(+) Razão Contábil" _
+& Chr(13) & "-------------------------------" & Chr(13) & "Resultado Conciliação >>>>>>>" _
+, vbInformation, "CONCILIAÇÃO | " & Planilha1.Range("C8").Value
+
+
+'Contrapartida do SE
+
+'ElseIf Planilha11.Range("M1").Value = 122 Then
+'MsgBox ">> 122 - MPB CAPITAL LLC | CONTAS BANCÁRIAS: " & Chr(13) & " " & Chr(13) & Planilha16.Range("AM5").Value _
+'& Planilha16.Range("AM6").Value & Chr(13) & Planilha16.Range("AM16").Value _
+', vbInformation, "CONCILIAÇÃO | OFFSHORE"
+
+
+End If
+
+
+End Sub
+
+
