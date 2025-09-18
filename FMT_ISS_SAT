@@ -1,0 +1,167 @@
+Sub FMT_ISS_SAT()
+
+
+Application.ScreenUpdating = False
+Application.Calculation = xlCalculationManual
+
+
+    Range("Q1").FormulaR1C1 = "*"
+    Range("R1").FormulaR1C1 = "Empresa"
+    Range("S1").FormulaR1C1 = "Data"
+    Range("T1").FormulaR1C1 = "Cliente"
+    Range("U1").FormulaR1C1 = "NF Inicial"
+    Range("V1").FormulaR1C1 = "NF Final"
+    Range("W1").FormulaR1C1 = "Cod Serviço"
+    Range("X1").FormulaR1C1 = "Vlr Contábil"
+    Range("Y1").FormulaR1C1 = "Vlr Serviço"
+    Range("Z1").FormulaR1C1 = "Isentas"
+    Range("AA1").FormulaR1C1 = "Base Cálculo"
+    Range("AB1").FormulaR1C1 = "Alíquota"
+    Range("AC1").FormulaR1C1 = "ISS Próp. Municipio"
+    Range("AD1").FormulaR1C1 = "ISS Out Mun."
+    Range("AE1").FormulaR1C1 = "ISS Retido"
+
+    Range("Q2").FormulaR1C1 = "=COUNT(RC[10])"
+    Range("R2").FormulaR1C1 = "=IF(LEFT(RC[-17],5)=""Firma"",MID(RC[-17],7,100),R[-1]C)"
+    Range("S2").FormulaR1C1 = "=IF(@CELL(""formato"",RC[-18])=""D1"",RC[-18],"""")"
+    Range("T2").FormulaR1C1 = "=IF(LEFT(R[1]C[-19],7)=""Cliente"",MID(R[1]C[-19],10,100),"""")"
+    Range("U2").FormulaR1C1 = "=IF(@CELL(""formato"",RC[-20])=""D1"",RC[-19],"""")"
+    Range("V2").FormulaR1C1 = "=IF(@CELL(""formato"",RC[-21])=""D1"",RC[-19],"""")"
+    Range("W2").FormulaR1C1 = "=IF(@CELL(""formato"",RC[-22])=""D1"",RC[-18],"""")"
+    Range("X2").FormulaR1C1 = "=IF(@CELL(""formato"",RC[-23])=""D1"",RC[-18],"""")"
+    Range("Y2").FormulaR1C1 = "=IF(@CELL(""formato"",RC[-24])=""D1"",RC[-18],"""")"
+    Range("Z2").FormulaR1C1 = "=IF(@CELL(""formato"",RC[-25])=""D1"",RC[-18],"""")"
+    Range("AA2").FormulaR1C1 = "=IF(@CELL(""formato"",RC[-26])=""D1"",RC[-18],"""")"
+    Range("AB2").FormulaR1C1 = "=IF(@CELL(""formato"",RC[-27])=""D1"",RC[-18],"""")"
+    Range("AC2").FormulaR1C1 = "=IF(@CELL(""formato"",RC[-28])=""D1"",RC[-18],"""")"
+    Range("AD2").FormulaR1C1 = "=IF(@CELL(""formato"",RC[-29])=""D1"",RC[-18],"""")"
+    Range("AE2").FormulaR1C1 = "=IF(@CELL(""formato"",RC[-30])=""D1"",RC[-18],"""")"
+    
+    Range("Q2:Q30000").Formula = Range("Q2").Formula
+    Range("R2:R30000").Formula = Range("R2").Formula
+    Range("S2:S30000").Formula = Range("S2").Formula
+    Range("T2:T30000").Formula = Range("T2").Formula
+    Range("U2:U30000").Formula = Range("U2").Formula
+    Range("V2:V30000").Formula = Range("V2").Formula
+    Range("W2:W30000").Formula = Range("W2").Formula
+    Range("X2:X30000").Formula = Range("X2").Formula
+    Range("Y2:Y30000").Formula = Range("Y2").Formula
+    Range("Z2:Z30000").Formula = Range("Z2").Formula
+    Range("AA2:AA30000").Formula = Range("AA2").Formula
+    Range("AB2:AB30000").Formula = Range("AB2").Formula
+    Range("AC2:AC30000").Formula = Range("AC2").Formula
+    Range("AD2:AD30000").Formula = Range("AD2").Formula
+    Range("AE2:AE30000").Formula = Range("AE2").Formula
+
+
+'Formatacao titulo tabela --> azul marinho + fonte branca
+
+Range("Q1:AE1").Select
+Range("Q1:AE1").Interior.Pattern = xlSolid
+Range("Q1:AE1").Interior.PatternColorIndex = xlAutomatic
+Range("Q1:AE1").Interior.ThemeColor = xlThemeColorLight2
+Range("Q1:AE1").Interior.TintAndShade = -0.499984740745262
+Range("Q1:AE1").Interior.PatternTintAndShade = 0
+Range("Q1:AE1").Font.Bold = True
+Range("Q1:AE1").Font.ThemeColor = xlThemeColorDark1
+Range("Q1:AE1").Font.TintAndShade = -4.99893185216834E-02
+Range("Q1:AE1").HorizontalAlignment = xlCenter
+
+
+'Formatacao relatorio financeiro
+
+ActiveWindow.Zoom = 70                                                                                                        '--> Zoom 70%
+Range("Q2:AE100000").HorizontalAlignment = xlCenter                                                                           '--> Centralizar conteudo
+Range("Q2:AE100000").Font.Name = "Calibri"                                                                                    '--> Fonte Calibri
+Range("Q2:AE100000").Font.Size = 9                                                                                            '--> Tamanho Fonte
+Columns("U:AE").ColumnWidth = 15.82                                                                                           '--> Ajuste Colunas
+Columns("T:T").ColumnWidth = 55#                                                                                              '--> Ajuste Colunas Fornecedor
+Range("X:X,Y:Y,AA:AA,AC:AC,AD:AD,AE:AE").NumberFormat = "_($* #,##0.00_);_($* (#,##0.00);_($* ""-""??_);_(@_)"                '--> Formato Contabil
+Range("S1:S100000").NumberFormat = "m/d/yyyy"                                                                                 '--> Formato Data
+
+
+'Elimina quebra pagina planilha
+
+Cells.Select
+Selection.VerticalAlignment = xlBottom
+Selection.WrapText = False
+Selection.Orientation = 0
+Selection.AddIndent = False
+Selection.IndentLevel = 0
+Selection.ShrinkToFit = False
+Selection.ReadingOrder = xlContext
+Selection.MergeCells = False
+   
+
+'Colar Valores e formatos
+
+Range("Q2:AE30000").Copy
+Range("Q2:AE30000").PasteSpecial Paste:=xlPasteValuesAndNumberFormats
+Application.CutCopyMode = False
+
+
+'Congela Paineis > congela linha superior
+
+Range("A2").Select
+Range("A2").Activate
+ActiveWindow.FreezePanes = True
+
+ 
+'Deleta colunas + estabelece AltoFiltro
+
+Columns("A:P").Delete
+Range("A1:O1").AutoFilter
+
+   
+'Ordena lancamentos > diferenciar celulas vazias
+   
+   
+    ActiveWorkbook.Worksheets("iob4BB2").AutoFilter.Sort.SortFields.Clear
+    ActiveWorkbook.Worksheets("iob4BB2").AutoFilter.Sort.SortFields.Add2 Key:= _
+        Range("C1"), SortOn:=xlSortOnValues, Order:=xlAscending, DataOption:= _
+        xlSortNormal
+    With ActiveWorkbook.Worksheets("iob4BB2").AutoFilter.Sort
+        .Header = xlYes
+        .MatchCase = False
+        .Orientation = xlTopToBottom
+        .SortMethod = xlPinYin
+        .Apply
+    End With
+   
+   
+'Informa NFs canceladas --> Nome Cliente
+            
+Range("P2").FormulaR1C1 = "=IF(RC[-8]=0,""Cancelada"",RC[-12])"
+Range("P2:P30000").Formula = Range("P2").Formula
+Range("P2:P30000").Copy
+Range("D2:D30000").PasteSpecial Paste:=xlPasteValuesAndNumberFormats
+Application.CutCopyMode = False
+   
+   
+'Limpa coluna A1 + Deleta Brancas [linhas lixo] --> Limpeza planilha
+   
+Range("A2:A100000").Clear
+
+Range("A1").FormulaR1C1 = "=COUNT(C[4])+2"
+Range("A" & Range("A1").Value).Select                   '--> Estabelece ultima celula preenchida [posicao]
+ActiveCell.EntireRow.Select                             '--> Seleciona 1o linha branca tabela
+Range(Selection, Selection.End(xlDown)).Select          '--> Faz selecao - linhas brancas
+Range(Selection, Selection.End(xlDown)).Delete          '--> Faz selecao - linhas brancas
+   
+Columns("A:A").Delete                                   '--> Deleta coluna > apos limpeza relatorio
+Columns("O:O").Delete                                   '--> Deleta coluna > apos insercao NFs canceladas
+            
+            
+Range("A2").Select
+   
+Application.Calculation = xlCalculationAutomatic
+Application.ScreenUpdating = True
+
+End Sub
+
+
+
+
+
+
+
